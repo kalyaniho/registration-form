@@ -1,1 +1,1 @@
-![design](https://github.com/kalyaniho/registration-form/assets/140436436/9ed98632-b898-4877-82b3-e805abc3bd4b)
+![Screenshot (41)](https://github.com/kalyaniho/registration-form/assets/140436436/20221167-e70a-4e12-94cc-16885bc0eb11)
