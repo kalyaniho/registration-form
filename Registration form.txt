@@ -1,0 +1,125 @@
+package signup;
+
+import javax.swing.*;
+import javax.swing.text.JTextComponent;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class signup extends JFrame implements ActionListener {
+    private JTextField lastNameField, emailField;
+    private JPasswordField passwordField;
+    private JButton registerButton;
+    private JTextField textField;
+
+    public signup() {
+        setTitle("Registration Form");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 580);
+        setResizable(false);
+
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(new Color(0, 255, 255)); // Background color
+
+        JLabel firstNameLabel = new JLabel("First Name:");
+        firstNameLabel.setBounds(10, 79, 168, 69);
+        firstNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        JLabel lastNameLabel = new JLabel("Last Name:");
+        lastNameLabel.setBounds(10, 147, 168, 69);
+        lastNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lastNameField = new JTextField();
+        lastNameField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        lastNameField.setBounds(198, 166, 168, 35);
+        JLabel emailLabel = new JLabel("Email:");
+        emailLabel.setBounds(10, 213, 168, 69);
+        emailLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        emailField = new JTextField();
+        emailField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        emailField.setBounds(198, 232, 168, 35);
+        JLabel passwordLabel = new JLabel("Password:");
+        passwordLabel.setBounds(10, 282, 168, 69);
+        passwordLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        passwordField = new JPasswordField();
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        passwordField.setBounds(198, 298, 168, 35);
+        registerButton = new JButton("Register");
+        registerButton.setBackground(new Color(192, 192, 192));
+        registerButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+
+        registerButton.addActionListener(this);
+        panel.setLayout(null);
+
+        panel.add(firstNameLabel);
+        
+        textField = new JTextField();
+        textField.setBounds(198, 93, 168, 35);
+        textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panel.add(textField);
+        textField.setPreferredSize(new Dimension(5, 5));
+
+        textField.setColumns(1);
+        panel.add(lastNameLabel);
+        panel.add(lastNameField);
+        panel.add(emailLabel);
+        panel.add(emailField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(registerButton);
+
+        getContentPane().add(panel, BorderLayout.CENTER);
+        
+        JLabel lblNewLabel = new JLabel("Registration Form");
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblNewLabel.setBounds(110, 10, 179, 25);
+        panel.add(lblNewLabel);
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+        setVisible(true);
+    }
+    private boolean isValidGmail(String email) {
+        // Gmail validation using a simple regex pattern
+        String gmailRegex = "^[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*@gmail\\.com$";
+        return email.matches(gmailRegex);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == registerButton) {
+        	String firstName = textField.getText();
+
+        	String firstName1 = textField.getText();
+
+            String lastName = lastNameField.getText();
+            String email = emailField.getText();
+            char[] passwordChars = passwordField.getPassword();
+            String password = new String(passwordChars);
+            
+
+            if (firstName1.isEmpty() || lastName.isEmpty() || email.isEmpty() || passwordChars.length == 0) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            } else if (!isValidEmail(email)) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid email address.");
+            } else {
+                // Perform registration logic here (e.g., store data in a database)
+                // For demonstration purposes, just display the entered details
+                JOptionPane.showMessageDialog(this,
+                        "Registration Successful!\n" +
+                                "First Name: " + firstName1 + "\n" +
+                                "Last Name: " + lastName + "\n" +
+                                "Email: " + email);
+            }
+        }
+    }
+
+    private boolean isValidEmail(String email) {
+        // Basic email validation using a simple regex
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(emailRegex);
+    }
+
+    public static void main(String[] args) {
+        new signup();
+    }
+}
